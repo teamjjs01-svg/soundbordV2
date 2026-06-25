@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VR NEON HUD</title>
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle, #000, #02030a);
+    font-family: Arial;
+    overflow: hidden;
+    color: #00ffe1;
+}
+
+.panel {
+    width: 900px;
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(10,15,30,0.7);
+    border: 1px solid #00ffe1;
+    box-shadow: 0 0 40px #00ffe1;
+    position: absolute;
+}
+
+/* BUTTONS */
+.item {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #00ffe1;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.item:hover {
+    background: #00ffe1;
+    color: black;
+}
+
+/* MENU */
+.menu { display: grid; grid-template-columns: repeat(4,1fr); gap:10px; }
+
+/* CONSOLE */
+#cmdBar {
+    display:none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    background: black;
+    border: 1px solid #00ffe1;
+    padding: 10px;
+}
+
+#cmdInput {
+    width: 100%;
+    padding: 8px;
+    background: black;
+    color: #00ffe1;
+    border: none;
+    outline: none;
+}
+
+#cmdLog {
+    height: 120px;
+    overflow-y: auto;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+
+<h2>VR NEON HUD</h2>
+
+<!-- DEV BUTTON -->
+<div class="item" onclick="toggleConsole()">🖥 Dev Console</div>
+
+<!-- SOUND TAB -->
+<h3>Sounds</h3>
+
+<div class="item" onclick="playSound('rat-dance-music')">
+🎵 rat-dance-music
+</div>
+<div class="item" onclick="playSound('backrooms')">
+🎵 backrooms
+</div>
+<div class="item" onclick="playSound('dreem core')">
+🎵 dreem core
+</div>
+<div class="item" onclick="playSound('mac-quack')">
+🎵 mac-quack
+</div>
+<div class="item" onclick="playSound('pluh')">
+🎵 pluh
+</div>
+<div class="item" onclick="playSound('dirtyLaundry')">
+🧺 Dirty Laundry
+</div>
+<div class="item" onclick="playSound('neonPaid')">
+💎 NEON HUD PAID SOUND
+</div>
+<div class="item" onclick="playSound('gtag')">
+🦍 GTAG Sound
+</div>
+<div class="item" onclick="playSound('kitty')">
+🐱 Kitty Sound
+</div>
+<div class="item" onclick="playSound('blud')">
+😂 Blud Sound
+</div>
+<div class="item" onclick="playSound('bludSound')">
+😂 Bluds LOL Sound
+</div>
+<div class="item" onclick="playSound('recording2')">
+🎬 Screen Recording 2
+</div>
+<div class="item" onclick="playSound('recording')">
+🎬 Screen Recording Sound
+</div>
+<div class="item" onclick="playSound('duBistGut')">
+💙 Du bist gut genug
+</div>
+<div class="item" onclick="playSound('moggers')">
+🔥 Moggers Music
+</div>
+<div class="item" onclick="playSound('beep')">🔊 Beep</div>
+<div class="item" onclick="playSound('pop')">💥 Pop</div>
+<div class="item" onclick="playSound('meme')">😂 Meme Sound</div>
+
+<div class="menu"></div>
+
+</div>
+
+<!-- CONSOLE -->
+<div id="cmdBar">
+<div id="cmdLog"></div>
+<input id="cmdInput" placeholder="type command..." />
+</div>
+
+<!-- AUDIO -->
+<audio id="beep" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+<audio id="pop" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+<audio id="meme" src="https://www.myinstants.com/media/sounds/taco-bell-bong-sfx.mp3"></audio>
+
+<script>
+
+/* SOUND */
+function playSound(id){
+    document.getElementById(id).play();
+}
+
+/* CONSOLE TOGGLE */
+let consoleOpen = false;
+
+function toggleConsole(){
+    consoleOpen = !consoleOpen;
+    document.getElementById("cmdBar").style.display =
+        consoleOpen ? "block" : "none";
+}
+
+/* COMMAND SYSTEM */
+const input = document.getElementById("cmdInput");
+const log = document.getElementById("cmdLog");
+
+input.addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+        let cmd = input.value;
+        log.innerHTML += "> " + cmd + "<br>";
+
+        if(cmd === "help"){
+            log.innerHTML += "commands: beep, pop, meme, clear<br>";
+        }
+        else if(cmd === "beep"){
+            playSound("beep");
+        }
+        else if(cmd === "pop"){
+            playSound("pop");
+        }
+        else if(cmd === "meme"){
+            playSound("meme");
+        }
+        else if(cmd === "clear"){
+            log.innerHTML = "";
+        }
+        else {
+            log.innerHTML += "unknown command<br>";
+        }
+
+        input.value = "";
+        log.scrollTop = log.scrollHeight;
+    }
+});
+
+function playSound(id){
+    let audio = document.getElementById(id);
+    audio.currentTime = 0;
+    audio.play();
+}
+
+</script>
+<audio id="moggers" src="moggers.mp3"></audio>
+
+<audio id="duBistGut" src="du-bist-gut-genug.mp3"></audio>
+
+<audio id="recording" src="Screen-Recording-2026-06-24-224234.mp3"></audio>
+
+<audio id="recording2" src="Screen-Recording-2026-06-24-224916.mp3"></audio>
+
+<audio id="bludSound" src="bludssss-lollololoololol.mp3"></audio>
+
+<audio id="blud" src="Blud.mp3"></audio>
+
+<audio id="kitty" src="Kitty.mp3"></audio>
+
+<audio id="gtag" src="gtag.mp3"></audio>
+
+<audio id="neonPaid" src="NEAON HUD PAID SOUND.mp3"></audio>
+
+<audio id="dirtyLaundry" src="My Girl Don’t Want Me Cause Of My Dirty Laundry .mp3"></audio>
+
+<audio id="pluh" src="pluh.mp3"></audio>
+
+<audio id="mac-quack" src="mac-quack.mp3"></audio>
+
+<audio id="dreem core" src="dreem core.mp3"></audio>
+
+<audio id="backrooms" src="backrooms.mp3"></audio>
+
+<audio id="rat-dance-music" src="rat-dance-music.mp3"></audio>
+
+</body>
+</html>
